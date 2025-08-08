@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <!-- Shop grid: append inline right after the main price span -->
+  <template id="gc_products_item_price_tax" inherit_id="website_sale.products_item">
+    <xpath expr=".//div[contains(@class,'o_wsale_product_information')]//div[contains(@class,'product_price')]/span[contains(@class,'h5')]" position="after">
+      <t t-set="order" t-value="request.website.sale_get_order()"/>
+      <t t-set="web_company" t-value="request.website.company_id"/>
+      <t t-set="mapped_taxes"
+         t-value="(order and order.fiscal_position_id and order.fiscal_position_id.sudo().map_tax(product.taxes_id, product, order.partner_id)) or product.taxes_id"/>
+      <t t-if="mapped_taxes">
+        <span class="o_price_tax_note small text-muted ml-1 d-inline-block">
+          <t t-set="seen" t-value="[]"/>
+          <t t-foreach="mapped_taxes.sudo()" t-as="tx">
+            <t t-if="(not tx.children_tax_ids) and (tx.company_id.id == web_company.id) and (tx.amount not in seen)">
+              + IVA <t t-esc="tx.amount % 1 and ('%s' % tx.amount) or int(tx.amount)"/>%
+              <t t-set="seen" t-value="seen + [tx.amount]"/>
+            </t>
+          </t>
+        </span>
+      </t>
+    </xpath>
+  </template>
+
+  <!-- Product page: append inline right after the main price span -->
+  <template id="gc_product_price_tax" inherit_id="website_sale.product_price">
+    <xpath expr=".//span[contains(@class,'oe_price')]" position="after">
+      <t t-set="order" t-value="request.website.sale_get_order()"/>
+      <t t-set="web_company" t-value="request.website.company_id"/>
+      <t t-set="mapped_taxes"
+         t-value="(order and order.fiscal_position_id and order.fiscal_position_id.sudo().map_tax(product.taxes_id, product, order.partner_id)) or product.taxes_id"/>
+      <t t-if="mapped_taxes">
+        <span class="o_price_tax_note small text-muted ml-1 d-inline-block">
+          <t t-set="seen" t-value="[]"/>
+          <t t-foreach="mapped_taxes.sudo()" t-as="tx">
+            <t t-if="(not tx.children_tax_ids) and (tx.company_id.id == web_company.id) and (tx.amount not in seen)">
+              + IVA <t t-esc="tx.amount % 1 and ('%s' % tx.amount) or int(tx.amount)"/>%
+              <t t-set="seen" t-value="seen + [tx.amount]"/>
+            </t>
+          </t>
+        </span>
+      </t>
+    </xpath>
+  </template>
+</odoo>
