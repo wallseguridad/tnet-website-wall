@@ -5,8 +5,9 @@
     <xpath expr=".//div[contains(@class,'o_wsale_product_information')]//div[contains(@class,'product_price')]/span[contains(@class,'h5')]" position="after">
       <t t-set="order" t-value="request.website.sale_get_order()"/>
       <t t-set="web_company" t-value="request.website.company_id"/>
+      <!-- Llamar a map_tax SOLO con 'taxes' para evitar error de firma -->
       <t t-set="mapped_taxes"
-         t-value="(order and order.fiscal_position_id and order.fiscal_position_id.sudo().map_tax(product.taxes_id, product, order.partner_id)) or product.taxes_id"/>
+         t-value="(order and order.fiscal_position_id and order.fiscal_position_id.sudo().map_tax(product.taxes_id)) or product.taxes_id"/>
       <t t-if="mapped_taxes">
         <span class="o_price_tax_note small text-muted ml-1 d-inline-block">
           <t t-set="seen" t-value="[]"/>
@@ -26,8 +27,9 @@
     <xpath expr=".//span[contains(@class,'oe_price')]" position="after">
       <t t-set="order" t-value="request.website.sale_get_order()"/>
       <t t-set="web_company" t-value="request.website.company_id"/>
+      <!-- Llamar a map_tax SOLO con 'taxes' para evitar error de firma -->
       <t t-set="mapped_taxes"
-         t-value="(order and order.fiscal_position_id and order.fiscal_position_id.sudo().map_tax(product.taxes_id, product, order.partner_id)) or product.taxes_id"/>
+         t-value="(order and order.fiscal_position_id and order.fiscal_position_id.sudo().map_tax(product.taxes_id)) or product.taxes_id"/>
       <t t-if="mapped_taxes">
         <span class="o_price_tax_note small text-muted ml-1 d-inline-block">
           <t t-set="seen" t-value="[]"/>
