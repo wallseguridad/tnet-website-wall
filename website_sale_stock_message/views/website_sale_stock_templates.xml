@@ -3,39 +3,13 @@
 
   <template id="website_sale_stock_product" inherit_id="website_sale.product" priority="4">
     <xpath expr="//div[@id='o_product_terms_and_share']" position="before">
-      <div class="website_sale_stock-badge">
-        <t t-if="(product.show_stock_message_1) and (product.qty_available &gt;= product.stock_message_1_condition)">
-          <span class="badge badge-success" t-esc="product.stock_message_1"/>
-        </t>
-        <t t-if="(product.show_stock_message_2) and (product.qty_available &gt;= product.stock_message_2_condition_2) and (product.qty_available &lt;= product.stock_message_2_condition_1)">
-          <span class="badge badge-warning" t-esc="product.stock_message_2"/>
-        </t>
-        <t t-if="(product.show_stock_message_3) and (product.qty_available &gt;= product.stock_message_3_condition_2) and (product.qty_available &lt;= product.stock_message_3_condition_1)">
-          <span class="badge badge-danger" t-esc="product.stock_message_3"/>
-        </t>
-        <t t-if="(product.show_stock_message_4) and (product.qty_available &lt;= product.stock_message_4_condition)">
-          <span class="badge badge-danger" t-esc="product.stock_message_4"/>
-        </t>
-      </div>
+      <t t-raw="product.get_stock_message()"/>
     </xpath>
   </template>
 
   <template id="website_sale_stock_products_item" inherit_id="website_sale.products_item">
     <xpath expr="//div[hasclass('product_price')]" position="before">
-      <div class="website_sale_stock-badge mb-2">
-        <t t-if="(product.show_stock_message_1) and (product.qty_available &gt;= product.stock_message_1_condition)">
-          <span class="badge badge-success" t-esc="product.stock_message_1"/>
-        </t>
-        <t t-if="(product.show_stock_message_2) and (product.qty_available &gt;= product.stock_message_2_condition_2) and (product.qty_available &lt;= product.stock_message_2_condition_1)">
-          <span class="badge badge-warning" t-esc="product.stock_message_2"/>
-        </t>
-        <t t-if="(product.show_stock_message_3) and (product.qty_available &gt;= product.stock_message_3_condition_2) and (product.qty_available &lt;= product.stock_message_3_condition_1)">
-          <span class="badge badge-danger" t-esc="product.stock_message_3"/>
-        </t>
-        <t t-if="(product.show_stock_message_4) and (product.qty_available &lt;= product.stock_message_4_condition)">
-          <span class="badge badge-danger" t-esc="product.stock_message_4"/>
-        </t>
-      </div>
+      <t t-raw="product.get_stock_message()"/>
     </xpath>
   </template>
 

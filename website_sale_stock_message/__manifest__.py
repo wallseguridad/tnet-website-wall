@@ -5,7 +5,7 @@
     'name': 'Website Sale Stock Message',
     'category': 'Website/Website',
     'summary': 'Manage the message regarding inventory and product availability',
-    "version": "15.0.1.0.1",
+    "version": "15.0.1.0.2",
     "license": "AGPL-3",
     "author": "Valentín Romero, Tecnicanet BA",
     'depends': [
@@ -13,7 +13,6 @@
         'sale_stock',
     ],
     'data': [
-        'security/ir.model.access.csv',
         'views/product_template_views.xml',
         'views/website_sale_stock_templates.xml',
     ],

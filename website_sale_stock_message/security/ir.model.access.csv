@@ -1,5 +1,0 @@
-id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
-stock_warehouse_user_public,"Almacen Public",stock.model_stock_warehouse,base.group_public,1,0,0,0
-stock_move_user_public,"Movimiento de existencias Public",stock.model_stock_move,base.group_public,1,0,0,0
-stock_location_user_public,"Ubicaciones de inventario Public",stock.model_stock_location,base.group_public,1,0,0,0
-stock_quant_user_public,"Quants Public",stock.model_stock_quant,base.group_public,1,0,0,0
